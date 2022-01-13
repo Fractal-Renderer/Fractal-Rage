@@ -1,4 +1,6 @@
 package view;
 
-public class FractalRageWindow {
+import javax.swing.*;
+
+public class FractalRageWindow extends JFrame {
 }
