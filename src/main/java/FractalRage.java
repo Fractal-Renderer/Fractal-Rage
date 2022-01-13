@@ -1,5 +1,9 @@
-public class FractalRage {
-    public static void main(String[] args) {
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
+public class FractalRage {
+
+    public static void main(String[] args) {
+        log.info("Starting application");
     }
 }
