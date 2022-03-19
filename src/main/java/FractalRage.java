@@ -42,13 +42,13 @@ public class FractalRage {
         FractalRenderer renderer = new FractalRenderer(fractal);
 
         var bounds = new Bounds(0, 0, 100, 100);
-        var res =  new Resolution(16, 9, 10);
+        var res = new Resolution(16, 9, 10);
 
         var fractalComp = new JComponent() {
             @Override
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                
+
                 var img = renderer.render(bounds, res);
                 g.drawImage(img, 0, 0, null);
             }
