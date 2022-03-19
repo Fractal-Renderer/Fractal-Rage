@@ -1,4 +1,4 @@
-package model;
+package model.fractals;
 
 import java.awt.*;
 

@@ -13,13 +13,13 @@ public class FractalRage {
     }
 
     private static void setupWindow() {
-        FractalRageWindow mainWindow = new FractalRageWindow();
+        FractalRageWindow win = new FractalRageWindow();
 
-        mainWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        mainWindow.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        win.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        win.setSize(Toolkit.getDefaultToolkit().getScreenSize());
 
         // add panel(s)
 
-        mainWindow.setVisible(true);
+        win.setVisible(true);
     }
 }
