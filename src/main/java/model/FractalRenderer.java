@@ -26,12 +26,12 @@ public class FractalRenderer {
         }
 
         BufferedImage image = new BufferedImage(res.width(), res.height(), BufferedImage.TYPE_INT_RGB);
-        double stepSizeH = res.height() / bounds.height();
-        double stepSizeW = res.width() / bounds.width();
+        double stepSizeH = bounds.height() / res.height();
+        double stepSizeW = bounds.width() / res.width();
 
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
-                image.setRGB(i, j, fractal.getColorAt(i * stepSizeW, j * stepSizeH).getRGB());
+                image.setRGB(i, j, fractal.getColorAt(i * stepSizeW + bounds.x(), j * stepSizeH + bounds.y()).getRGB());
             }
         }
 

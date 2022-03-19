@@ -27,7 +27,6 @@ public class FractalRage {
         win.setSize(Toolkit.getDefaultToolkit().getScreenSize());
 
         // add panel(s)
-
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
         panel.add(getFractal(new Mandelbrot()));
@@ -41,8 +40,8 @@ public class FractalRage {
     private static JComponent getFractal (Fractal fractal) {
         FractalRenderer renderer = new FractalRenderer(fractal);
 
-        var bounds = new Bounds(0, 0, 100, 100);
-        var res = new Resolution(16, 9, 10);
+        var bounds = new Bounds(-2, -2, 4, 4);
+        var res = new Resolution(750, 750);
 
         var fractalComp = new JComponent() {
             @Override
