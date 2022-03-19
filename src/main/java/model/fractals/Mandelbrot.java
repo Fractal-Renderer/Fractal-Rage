@@ -1,7 +1,6 @@
 package model.fractals;
 
 import java.awt.*;
-import java.util.Random;
 
 public class Mandelbrot implements Fractal {
 

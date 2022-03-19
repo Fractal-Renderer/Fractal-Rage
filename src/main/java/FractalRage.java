@@ -48,14 +48,11 @@ public class FractalRage {
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
 
-                var img = renderer.render(bounds, res);
-                g.drawImage(img, 0, 0, null);
+                g.drawImage(renderer.render(bounds, res), 0, 0, null);
             }
         };
 
         fractalComp.setPreferredSize(new Dimension(res.width(), res.height()));
-
-
         return fractalComp;
     }
 }
