@@ -53,6 +53,8 @@ public class FractalComponent extends JComponent {
             bounds.set(new Bounds(x, y, width, height));
             repaint();
         });
+
+        setPreferredSize(new Dimension(resolution.width(), resolution.height()));
     }
 
     @Override

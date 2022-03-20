@@ -38,14 +38,8 @@ public class FractalRage {
     }
 
     private static JComponent getFractal (Fractal fractal) {
-
         final var res = new Resolution(800, 800);
         var bounds = new AtomicReference<>(new Bounds(-2, -2, 4, 4));
-
-        var fractalComp = new FractalComponent(fractal, bounds, res);
-
-
-        fractalComp.setPreferredSize(new Dimension(res.width(), res.height()));
-        return fractalComp;
+        return new FractalComponent(fractal, bounds, res);
     }
 }
