@@ -3,6 +3,7 @@ package model;
 import lombok.Setter;
 import model.data.Bounds;
 import model.data.Resolution;
+import model.data.Vector3;
 import model.fractals.Fractal;
 
 import java.awt.*;
@@ -31,26 +32,37 @@ public class FractalRenderer {
         double stepSizeH = bounds.height() / res.height();
         double stepSizeW = bounds.width() / res.width();
 
+        long time0 = System.currentTimeMillis();
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
-                image.setRGB(i, j, fractal.getColorAt(i * stepSizeW + bounds.x(), j * stepSizeH + bounds.y()).getRGB());
+                image.setRGB(i, j, renderPixel(i, j, stepSizeW, stepSizeH, bounds).getRGB());
             }
         }
-
+        long time1 = System.currentTimeMillis();
+        System.out.println(time1 - time0);
         return image;
     }
 
     private Color renderPixel(double x, double y, double sx, double sy, Bounds bounds) {
-        int AA = 2;
+        //Set this to 2 for SSAA 4x anti-aliasing. Note 4x slower to render
+        int AA = 1;
+
+        Vector3 col = new Vector3();
 
         for(int a=0; a<AA; a++) {
             for (int b = 0; b < AA; b++) {
-                fractal.getColorAt(x * sx + bounds.x(), y * sy + bounds.y());
 
+                Vector3 f = fractal.getColorAt(x * sx + bounds.x(), y * sy + bounds.y());
+                col = col.add(new Vector3(f.x, f.y, f.z));
 
             }
         }
 
-        return null;
+        col = col.div(AA*AA);
+        col = col.clamp(0, 1);
+        Color color = new Color(col.x, col.y, col.z);
+
+        return color;
+
     }
 }
