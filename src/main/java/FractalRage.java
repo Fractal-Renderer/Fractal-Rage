@@ -69,16 +69,12 @@ public class FractalRage {
             double pY = ((pos.getY() / fractalComp.getHeight()) * cBounds.height()) + cBounds.y();
 
 
-            // distance from frame (old)
-            double distW = pX - cBounds.x();
-            double distH = pY - cBounds.y();
-
             // new coordinates
             double width = cBounds.width() * scale;
             double height = cBounds.height() * scale;
 
-            double x = pX - (distW * scale);
-            double y = pY - (distH * scale);
+            double x = pX - (scale * (pX - cBounds.x()));
+            double y = pY - (scale * (pY - cBounds.y()));
 
             bounds.set(new Bounds(x, y, width, height));
             fractalComp.repaint();
