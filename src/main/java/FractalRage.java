@@ -58,8 +58,9 @@ public class FractalRage {
             var mX = ((pos.getX() / (double) fractalComp.getWidth()) * curBounds.width()) + curBounds.x();
             var mY = ((pos.getY() / (double) fractalComp.getHeight()) * curBounds.height()) + curBounds.y();
 
-            double width = curBounds.width() + e.getWheelRotation();
-            double height = curBounds.height() + e.getWheelRotation();
+            double incr = (Math.abs(e.getWheelRotation()) + (0.05 * ((e.getWheelRotation() < 0) ? -1 : 1)));
+            double width = curBounds.width() * incr;
+            double height = curBounds.height() * incr;
 
             double x = mX - (width / 2f);
             double y = mY - (height / 2f);
