@@ -43,7 +43,7 @@ public class FractalComponent extends JComponent {
                     double difX = prev.getX() - point.getX();
                     double difY = prev.getY() - point.getY();
 
-                    bounds.set(new Bounds(bounds.get().x() + difX / 1.2, bounds.get().y() + difY / 1.2, bounds.get().width(), bounds.get().height()));
+                    bounds.set(new Bounds(bounds.get().x() + difX / 2, bounds.get().y() + difY / 2, bounds.get().width(), bounds.get().height()));
                     repaint();
                 }
                 prev = point;
@@ -52,7 +52,6 @@ public class FractalComponent extends JComponent {
             @Override
             public void mouseReleased (MouseEvent e) {
                 prev = null;
-                System.out.println(e);
             }
 
             @Override
