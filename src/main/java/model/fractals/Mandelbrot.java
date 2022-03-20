@@ -4,6 +4,8 @@ import java.awt.*;
 
 public class Mandelbrot implements Fractal {
 
+    int power;
+
     public Mandelbrot () {
 
     }

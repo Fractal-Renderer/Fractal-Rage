@@ -5,6 +5,7 @@ import model.data.Bounds;
 import model.data.Resolution;
 import model.fractals.Fractal;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -37,5 +38,19 @@ public class FractalRenderer {
         }
 
         return image;
+    }
+
+    private Color renderPixel(double x, double y, double sx, double sy, Bounds bounds) {
+        int AA = 2;
+
+        for(int a=0; a<AA; a++) {
+            for (int b = 0; b < AA; b++) {
+                fractal.getColorAt(x * sx + bounds.x(), y * sy + bounds.y());
+
+
+            }
+        }
+
+        return null;
     }
 }
