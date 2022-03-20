@@ -37,11 +37,11 @@ public class FractalRage {
     }
 
     private static JComponent getFractal (Fractal fractal) {
-        FractalRenderer renderer = new FractalRenderer(fractal);
+
+        final var res = new Resolution(800, 800);
+        final FractalRenderer renderer = new FractalRenderer(fractal);
 
         var bounds = new AtomicReference<>(new Bounds(-2, -2, 4, 4));
-
-        var res = new Resolution(800, 800);
 
         var fractalComp = new JComponent() {
             @Override
@@ -52,25 +52,34 @@ public class FractalRage {
         };
 
         fractalComp.addMouseWheelListener(e -> {
-            var curBounds = bounds.get();
+            var cBounds = bounds.get();
+            double scale = 1 + (0.1 * (e.getWheelRotation() < 0 ? -1 : 1));
 
+            // mouse pos on screen
             var pos = fractalComp.getMousePosition();
-            var mX = ((pos.getX() / (double) fractalComp.getWidth()) * curBounds.width()) + curBounds.x();
-            var mY = ((pos.getY() / (double) fractalComp.getHeight()) * curBounds.height()) + curBounds.y();
 
-            double incr = (Math.abs(e.getWheelRotation()) + (0.05 * ((e.getWheelRotation() < 0) ? -1 : 1)));
-            double width = curBounds.width() * incr;
-            double height = curBounds.height() * incr;
+            if (pos == null) {
+                return;
+            }
 
-            double x = mX - (width / 2f);
-            double y = mY - (height / 2f);
+            double pX = ((pos.getX() / fractalComp.getWidth()) * cBounds.width()) + cBounds.x();
+            double pY = ((pos.getY() / fractalComp.getHeight()) * cBounds.height()) + cBounds.y();
+
+
+            // distance from frame (old)
+            double distW = pX - cBounds.x();
+            double distH = pY - cBounds.y();
+
+            // new coordinates
+            double width = cBounds.width() * scale;
+            double height = cBounds.height() * scale;
+
+            double x = pX - (distW * scale);
+            double y = pY - (distH * scale);
 
             bounds.set(new Bounds(x, y, width, height));
             fractalComp.repaint();
-            System.out.println(bounds);
         });
-
-
 
         fractalComp.setPreferredSize(new Dimension(res.width(), res.height()));
         return fractalComp;
