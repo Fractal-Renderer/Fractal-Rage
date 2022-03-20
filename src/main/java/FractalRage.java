@@ -38,41 +38,8 @@ public class FractalRage {
     }
 
     private static JComponent getFractal (Fractal fractal) {
-
         final var res = new Resolution(800, 800);
         var bounds = new AtomicReference<>(new Bounds(-2, -2, 4, 4));
-
-        var fractalComp = new FractalComponent(fractal, bounds, res);
-
-        fractalComp.addMouseWheelListener(e -> {
-            var cBounds = bounds.get();
-
-            // TODO make independent of hardcoded values
-            double scale = e.getWheelRotation() > 0 ? 1.1 : 0.9;
-
-            // mouse pos on screen
-            var pos = fractalComp.getMousePosition();
-
-            // TODO make this cleaner
-            if (pos == null) {
-                return;
-            }
-
-            double pX = ((pos.getX() / fractalComp.getWidth()) * cBounds.width()) + cBounds.x();
-            double pY = ((pos.getY() / fractalComp.getHeight()) * cBounds.height()) + cBounds.y();
-
-            // new coordinates
-            double width = cBounds.width() * scale;
-            double height = cBounds.height() * scale;
-
-            double x = pX - (scale * (pX - cBounds.x()));
-            double y = pY - (scale * (pY - cBounds.y()));
-
-            bounds.set(new Bounds(x, y, width, height));
-            fractalComp.repaint();
-        });
-
-        fractalComp.setPreferredSize(new Dimension(res.width(), res.height()));
-        return fractalComp;
+        return new FractalComponent(fractal, bounds, res);
     }
 }
