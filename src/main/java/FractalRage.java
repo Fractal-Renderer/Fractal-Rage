@@ -53,11 +53,14 @@ public class FractalRage {
 
         fractalComp.addMouseWheelListener(e -> {
             var cBounds = bounds.get();
-            double scale = 1 + (0.1 * (e.getWheelRotation() < 0 ? -1 : 1));
+
+            // TODO make independent of hardcoded values
+            double scale = e.getWheelRotation() > 0 ? 1.1 : 0.9;
 
             // mouse pos on screen
             var pos = fractalComp.getMousePosition();
 
+            // TODO make this cleaner
             if (pos == null) {
                 return;
             }
