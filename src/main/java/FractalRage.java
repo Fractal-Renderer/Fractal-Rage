@@ -4,6 +4,7 @@ import model.data.Bounds;
 import model.data.Resolution;
 import model.fractals.Fractal;
 import model.fractals.Mandelbrot;
+import view.FractalComponent;
 import view.FractalRageWindow;
 
 import javax.swing.*;
@@ -39,17 +40,9 @@ public class FractalRage {
     private static JComponent getFractal (Fractal fractal) {
 
         final var res = new Resolution(800, 800);
-        final FractalRenderer renderer = new FractalRenderer(fractal);
-
         var bounds = new AtomicReference<>(new Bounds(-2, -2, 4, 4));
 
-        var fractalComp = new JComponent() {
-            @Override
-            public void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                g.drawImage(renderer.render(bounds.get(), res), 0, 0, null);
-            }
-        };
+        var fractalComp = new FractalComponent(fractal, bounds, res);
 
         fractalComp.addMouseWheelListener(e -> {
             var cBounds = bounds.get();
@@ -67,7 +60,6 @@ public class FractalRage {
 
             double pX = ((pos.getX() / fractalComp.getWidth()) * cBounds.width()) + cBounds.x();
             double pY = ((pos.getY() / fractalComp.getHeight()) * cBounds.height()) + cBounds.y();
-
 
             // new coordinates
             double width = cBounds.width() * scale;
