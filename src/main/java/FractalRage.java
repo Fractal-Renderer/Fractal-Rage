@@ -54,15 +54,21 @@ public class FractalRage {
         fractalComp.addMouseWheelListener(e -> {
             var curBounds = bounds.get();
 
+            var pos = fractalComp.getMousePosition();
+            var mX = ((pos.getX() / (double) fractalComp.getWidth()) * curBounds.width()) + curBounds.x();
+            var mY = ((pos.getY() / (double) fractalComp.getHeight()) * curBounds.height()) + curBounds.y();
+
             double width = curBounds.width() + e.getWheelRotation();
             double height = curBounds.height() + e.getWheelRotation();
 
-            double x = curBounds.x() - (e.getWheelRotation() / 2f);
-            double y = curBounds.y() - (e.getWheelRotation() / 2f);
+            double x = mX - (width / 2f);
+            double y = mY - (height / 2f);
 
             bounds.set(new Bounds(x, y, width, height));
             fractalComp.repaint();
+            System.out.println(bounds);
         });
+
 
 
         fractalComp.setPreferredSize(new Dimension(res.width(), res.height()));
