@@ -7,9 +7,8 @@ import model.fractals.Mandelbrot;
 import view.FractalRageWindow;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.image.ImageObserver;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Slf4j
 public class FractalRage {
@@ -40,17 +39,31 @@ public class FractalRage {
     private static JComponent getFractal (Fractal fractal) {
         FractalRenderer renderer = new FractalRenderer(fractal);
 
-        var bounds = new Bounds(-2, -2, 4, 4);
-        var res = new Resolution(750, 750);
+        var bounds = new AtomicReference<>(new Bounds(-2, -2, 4, 4));
+
+        var res = new Resolution(800, 800);
 
         var fractalComp = new JComponent() {
             @Override
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
-
-                g.drawImage(renderer.render(bounds, res), 0, 0, null);
+                g.drawImage(renderer.render(bounds.get(), res), 0, 0, null);
             }
         };
+
+        fractalComp.addMouseWheelListener(e -> {
+            var curBounds = bounds.get();
+
+            double width = curBounds.width() + e.getWheelRotation();
+            double height = curBounds.height() + e.getWheelRotation();
+
+            double x = curBounds.x() - (e.getWheelRotation() / 2f);
+            double y = curBounds.y() - (e.getWheelRotation() / 2f);
+
+            bounds.set(new Bounds(x, y, width, height));
+            fractalComp.repaint();
+        });
+
 
         fractalComp.setPreferredSize(new Dimension(res.width(), res.height()));
         return fractalComp;

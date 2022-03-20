@@ -9,11 +9,7 @@ public class Mandelbrot implements Fractal {
     }
 
     @Override
-    public Color getColorAt(double x, double y) {
-        return getValueAt(x, y);
-    }
-
-    private Color getValueAt(double x0, double y0) {
+    public Color getColorAt(double x0, double y0) {
         double x = 0, y = 0, x2 = 0, y2 = 0;
 
         for (int iteration = 0; iteration < 100; iteration++) {
