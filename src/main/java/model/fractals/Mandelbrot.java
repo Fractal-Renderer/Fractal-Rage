@@ -33,9 +33,9 @@ public class Mandelbrot implements Fractal {
             //https://iquilezles.org/www/articles/mset_smooth/mset_smooth.htm
             double sn = iter - log2(log2(dot(r, i, r, i))/(log2(threshold)))/log2(power);
 
-            float colx = (float)(0.5f + 0.5f*Math.cos(3.0f + sn*0.075f*power + 0.0f))*0.5f;
-            float coly = (float)(0.5f + 0.5f*Math.cos(3.0f + sn*0.075f*power + 0.8f))*0.5f;
-            float colz = (float)(0.5f + 0.5f*Math.cos(3.0f + sn*0.075f*power + 5.8f))*0.5f;
+            float colx = (float)(0.25f * (1 + Math.cos(3.0f + sn * 0.075f * power + 0.0f)));
+            float coly = (float)(0.25f * (1 + Math.cos(3.0f + sn * 0.075f * power + 0.8f)));
+            float colz = (float)(0.25f * (1 + Math.cos(3.0f + sn * 0.075f * power + 5.8f)));
 
             return new Vector3(colx, coly, colz);
         }
