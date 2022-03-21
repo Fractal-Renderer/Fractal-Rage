@@ -52,7 +52,7 @@ public class Mandelbrot implements Fractal {
     }
 
     double len(final double ax, final double ay) {
-        return Math.sqrt(ax * ax + ay);
+        return Math.sqrt(ax * ax + ay * ay);
     }
 
     public double log2(double N) {
