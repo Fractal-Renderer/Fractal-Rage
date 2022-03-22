@@ -45,7 +45,7 @@ public class FractalRenderer {
 
     private Color renderPixel(double x, double y, double sx, double sy, Bounds bounds) {
         //Set this to 2 for SSAA 4x anti-aliasing. Note 4x slower to render
-        int AA = 1;
+        int AA = 2;
 
         Vector3 col = new Vector3();
 

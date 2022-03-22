@@ -5,7 +5,7 @@ import model.data.Vector3;
 public class Mandelbrot implements Fractal {
 
     int power = 2;
-    int maxIter = 100;
+    int maxIter = 2000;
     int threshold = 16;
 
     public Mandelbrot () {
