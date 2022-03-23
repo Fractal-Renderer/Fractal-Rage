@@ -5,11 +5,11 @@ import com.aparapi.Kernel;
 
 public class MandelbrotFloat extends RenderKernelAbstract {
 
-    final int height;
-    final int width;
+    private final int height;
+    private final int width;
 
-    final float[] buffer; //Buffer is passed out with RGB data for image {R, G, B, R, G, B, ...}
-    final float[] data; //Data is passed in the following form {XCoord, YCoord, ZoomFactor, FractalPower, Iterations, Threshold, AntiAliasing, ColormapR, ColormapG, ColormapB}
+    private final float[] buffer; //Buffer is passed out with RGB data for image {R, G, B, R, G, B, ...}
+    private final float[] data; //Data is passed in the following form {XCoord, YCoord, ZoomFactor, FractalPower, Iterations, Threshold, AntiAliasing, ColormapR, ColormapG, ColormapB}
 
 
 
@@ -48,7 +48,7 @@ public class MandelbrotFloat extends RenderKernelAbstract {
         float colz = 0;
         for(int a=0; a<AA; a++) {
             for(int b=0; b<AA; b++) {
-                //Calculate coords using pixel and ambient occlusion offset and zoom factor
+                //Calculate coords using pixel and anti aliasing offset and zoom factor
                 final float aox = (float) a / (float) AA - 0.5f;
                 final float aoy = (float) b / (float) AA - 0.5f;
                 final float crt = zoom * (((this.width * -1.0f) + ((pix + aox) * 2.0f)) / this.height);
